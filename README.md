@@ -51,16 +51,61 @@ import { withNgxsCaptureDevReduxMiddlewarePlugin } from 'ngxs-capture.dev-plugin
 // Initialize Capture.dev - it should be loaded from the CDN beforehand
 // via a <script> tag in index.html:
 // https://cdn.capture.dev/capture-js/browser/latest.js
-Capture.identify({ '...' });
+Capture.identify({ options: '...' });
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideStore(
-      [/* your states */],
+      [
+        /* your states */
+      ],
       withNgxsCaptureDevReduxMiddlewarePlugin(),
     ),
   ],
 };
+```
+
+### Lazy-loading Plugin
+
+You can also lazy-load the plugin when Capture.dev is needed in your application, for example when a user logs in and `Capture.identify` is called:
+
+```ts
+// somewhere in the app
+import { inject, EnvironmentInjector, createEnvironmentInjector, Injector } from '@angular/core';
+import { provideStates } from '@ngxs/store';
+
+@Injectable({ providedIn: 'root' })
+export class CaptureDevService {
+  private injector = inject(EnvironmentInjector);
+
+  async start() {
+    // Configure Capture.dev options.
+    window.captureOptions = { captureKey: config.captureKey };
+
+    // Load Capture.dev script.
+    await loadScript('https://cdn.capture.dev/capture-js/browser/latest.js');
+
+    window.Capture.identify({ options: '...' });
+
+    // Lazy-load the NGXS plugin.
+    const { withNgxsCaptureDevReduxMiddlewarePlugin } = await import('ngxs-capture.dev-plugin');
+
+    // Register plugin in child injector so it's available globally.
+    // This adds the plugin to NGXS without requiring app-level configuration.
+    createEnvironmentInjector([provideStates([], withNgxsCaptureDevReduxMiddlewarePlugin())], this.injector);
+  }
+}
+
+// Helper function to load external scripts.
+function loadScript(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+    document.head.appendChild(script);
+  });
+}
 ```
 
 ## Action Status Types
