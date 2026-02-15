@@ -9,9 +9,10 @@
   },
   "homepage": "https://github.com/arturovt/ngxs-capture.dev-plugin#readme",
   "scripts": {
-    "postinstall": "husky",
+    "postinstall": "husky init",
     "build": "nx build ngxs-capture.dev-plugin",
-    "postbuild": "cp README.md dist/libs/ngxs-capture.dev-plugin/README.md"
+    "postbuild": "cp README.md dist/libs/ngxs-capture.dev-plugin/README.md",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "2.2.0",
