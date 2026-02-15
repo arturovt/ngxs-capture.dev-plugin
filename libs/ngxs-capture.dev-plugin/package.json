@@ -1,6 +1,6 @@
 {
   "name": "ngxs-capture.dev-plugin",
-  "version": "21.0.0",
+  "version": "21.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arturovt/ngxs-capture.dev-plugin.git"
