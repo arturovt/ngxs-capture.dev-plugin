@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-const password = '***';
+const password = process.env.PASSWORD;
 const algorithm = 'aes-256-cbc';
 
 const key = crypto.scryptSync(password, 'salt', 32);
