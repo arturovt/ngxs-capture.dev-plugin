@@ -19,6 +19,7 @@ const promise = new Promise((resolve) => {
   const script = document.createElement('script');
   script.src = 'https://cdn.capture.dev/capture-js/browser/latest.js';
   script.addEventListener('load', resolve);
+  document.head.appendChild(script);
 });
 
 async function bootstrap() {

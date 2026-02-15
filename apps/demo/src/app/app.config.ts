@@ -8,6 +8,7 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideStore } from '@ngxs/store';
+import { withNgxsCaptureDevReduxMiddlewarePlugin } from 'ngxs-capture.dev-plugin';
 
 import { appRoutes } from './app.routes';
 import { CounterState } from './counter.state';
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(appRoutes),
-    provideStore([CounterState]),
+    provideStore([CounterState], withNgxsCaptureDevReduxMiddlewarePlugin()),
   ],
 };
