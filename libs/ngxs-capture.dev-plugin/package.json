@@ -1,0 +1,35 @@
+{
+  "name": "ngxs-capture.dev-plugin",
+  "version": "21.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturovt/ngxs-capture.dev-plugin.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/arturovt/ngxs-capture.dev-plugin#readme",
+  "bugs": {
+    "url": "git+https://github.com/arturovt/ngxs-capture.dev-plugin/issues"
+  },
+  "keywords": [
+    "angular",
+    "ngxs",
+    "logrocket",
+    "plugin",
+    "middleware",
+    "state-management",
+    "session-replay",
+    "error-tracking",
+    "debugging",
+    "monitoring",
+    "redux",
+    "analytics"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "@angular/core": ">=21.0.0",
+    "@ngxs/store": ">=21.0.0"
+  },
+  "dependencies": {
+    "@scarf/scarf": "^1.4.0"
+  }
+}
